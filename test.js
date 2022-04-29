@@ -1,4 +1,4 @@
-import { Contenedor } from "./archivo.js";
+/*import { Contenedor } from "./archivo.js";
 
 let testeo = new Contenedor ('./productos.txt')
  testeo.getAll()
@@ -7,3 +7,4 @@ let testeo = new Contenedor ('./productos.txt')
 // testeo.save()
 // testeo.getById(4)
 
+*/

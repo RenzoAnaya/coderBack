@@ -86,7 +86,21 @@ export default class Contenedor {
         }
     }
 
-
+    async getByRandomId (){
+        try {
+            randomId = Math.random() * this.file.length
+            let informacion = await fs.promises.readFile(this.file,'utf-8')
+            let informacionObjeto = JSON.parse(informacion)
+            let dataId = informacionObjeto.find(idUsable => idUsable.id === a);
+            console.log(dataId)
+            console.log(informacionObjeto)
+            
+        } catch (error) {
+            console.log('error',error)
+            
+        }
+        
+    }
 
 
 
