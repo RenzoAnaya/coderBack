@@ -1,13 +1,10 @@
+const { json } = require("express/lib/response")
 const fs = require("fs")
 
-export default class Contenedor {
+class Contenedor {
     constructor(file){
         this.file = file 
     }
-
-    
-    
-
     
     async save(){
         try {
@@ -47,13 +44,28 @@ export default class Contenedor {
             let informacion = await fs.promises.readFile(this.file,'utf-8')
             let informacionObjeto = JSON.parse(informacion)
             console.log (informacionObjeto)
-            return informacionObjeto
+            return (JSON.stringify(informacionObjeto))
         } catch (error) {
             console.log('error getAll',error)
             
         }
     }
 
+    async getByRandomId (){
+        try {
+            let randomId = (Math.floor((Math.random() * (this.file.length - 1 )) + 1))
+            let informacion = await fs.promises.readFile(this.file,'utf-8')
+            let informacionObjeto = JSON.parse(informacion)
+            let dataId = informacionObjeto.find(idUsable => idUsable.id === randomId);
+            console.log(dataId)
+            return (JSON.stringify(dataId))
+            
+        } catch (error) {
+            console.log('error',error)
+            
+        }
+        
+    }
     
 
     async deleteById(a){
@@ -86,29 +98,13 @@ export default class Contenedor {
         }
     }
 
-    async getByRandomId (){
-        try {
-            randomId = Math.random() * this.file.length
-            let informacion = await fs.promises.readFile(this.file,'utf-8')
-            let informacionObjeto = JSON.parse(informacion)
-            let dataId = informacionObjeto.find(idUsable => idUsable.id === a);
-            console.log(dataId)
-            console.log(informacionObjeto)
-            
-        } catch (error) {
-            console.log('error',error)
-            
-        }
-        
-    }
-
+   
 
 
 }
 
+module.exports = Contenedor;
 
-
-let testeo = new Contenedor ('./productos.txt')
 //testeo.getAll()
 //testeo.deleteAll()
 //testeo.deleteById(2)
